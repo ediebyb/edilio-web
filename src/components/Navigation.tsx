@@ -45,7 +45,7 @@ export default function Navigation() {
             aria-label="Edilio Beas - Ir al inicio"
           >
             <img
-              src="/logo-transparent.png"
+              src="/Logo (2).png"
               alt="Edilio Beas Logo"
               className="h-20 w-auto"
             />
