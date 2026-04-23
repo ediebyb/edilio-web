@@ -36,18 +36,18 @@ export default function Navigation() {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         aria-label="Navegación principal"
       >
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo / Marca */}
           <a
             href="#inicio"
             onClick={(e) => handleNavClick(e, '#inicio')}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-4"
             aria-label="Edilio Beas - Ir al inicio"
           >
             <img
               src="/logo-transparent.png"
               alt="Edilio Beas Logo"
-              className="h-16 w-auto"
+              className="h-20 w-auto"
             />
           </a>
 
