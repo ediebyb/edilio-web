@@ -1,16 +1,11 @@
 import { motion } from 'framer-motion'
 import { Shield } from 'lucide-react'
 import { fadeIn } from '@/utils/animations'
+import { SETMORE_LINK } from '@/data/setmore'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
 export default function Footer() {
-  const handleScrollToContact = () => {
-    const target = document.querySelector('#contacto')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <motion.footer
@@ -34,12 +29,14 @@ export default function Footer() {
             <p className="text-gray-400 mb-6">
               Únete a las 30+ empresas en LATAM que ya aumentaron sus ventas y recuperaron su tiempo con mis estrategias.
             </p>
-            <button 
-              onClick={handleScrollToContact}
+            <a
+              href={SETMORE_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-[#C5A059] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#D4AF6A] transition-colors"
             >
               Agenda tu consultoría gratis →
-            </button>
+            </a>
           </div>
 
           {/* COLUMNA 2: Stats de Autoridad */}

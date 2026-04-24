@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, PanInfo } from 'framer-motion'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -58,6 +58,20 @@ export default function TestimonialsSection() {
 
     setCurrentIndex((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1))
 
+  }
+
+  const handleDragEnd = (_e: any, { offset, velocity }: PanInfo) => {
+    const swipe = swipePower(offset.x, velocity.x)
+    if (swipe < -swipeConfidenceThreshold) {
+      handleNext()
+    } else if (swipe > swipeConfidenceThreshold) {
+      handlePrev()
+    }
+  }
+
+  const swipeConfidenceThreshold = 10000
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity
   }
 
 
@@ -179,6 +193,14 @@ export default function TestimonialsSection() {
                 animate="center"
 
                 exit="exit"
+
+                drag="x"
+
+                dragConstraints={{ left: 0, right: 0 }}
+
+                dragElastic={1}
+
+                onDragEnd={handleDragEnd}
 
               >
 

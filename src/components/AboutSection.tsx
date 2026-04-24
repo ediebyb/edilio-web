@@ -2,15 +2,9 @@ import { motion } from 'framer-motion'
 import { Calendar } from 'lucide-react'
 import { STATS, BIO } from '@/data/about'
 import { staggerContainer, fadeInUp, slideInLeft } from '@/utils/animations'
+import { SETMORE_LINK } from '@/data/setmore'
 
 export default function AboutSection() {
-  const handleScrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const target = document.querySelector('#contacto')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <section
@@ -105,8 +99,9 @@ export default function AboutSection() {
             {/* CTA */}
             <motion.div variants={fadeInUp}>
               <a
-                href="#contacto"
-                onClick={handleScrollToContact}
+                href={SETMORE_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white font-semibold rounded-xl hover:bg-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 <Calendar size={20} aria-hidden="true" />

@@ -6,7 +6,9 @@ export interface Service {
   title: string
   shortDescription: string
   price: string
+  priceNote?: string
   cta: string
+  image: string
   fullDetails: {
     description: string
     features: string[]
@@ -14,6 +16,7 @@ export interface Service {
     timeline: string
     ctaFinal: string
   }
+  note?: string
 }
 
 export interface Testimonial {

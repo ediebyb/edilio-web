@@ -6,17 +6,10 @@ import { staggerContainer, fadeInUp } from '@/utils/animations'
 import ServiceCard from './ServiceCard'
 import ServiceModal from './ServiceModal'
 import type { Service } from '@/types'
+import { SETMORE_LINK } from '@/data/setmore'
 
 export default function ServicesSection() {
   const [selectedService, setSelectedService] = useState<Service | null>(null)
-
-  const handleScrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const target = document.querySelector('#contacto')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   const handleOpenModal = (service: Service) => {
     setSelectedService(service)
@@ -87,14 +80,21 @@ export default function ServicesSection() {
           className="text-center mt-16"
         >
           <a
-            href="#contacto"
-            onClick={handleScrollToContact}
+            href={SETMORE_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white font-semibold rounded-xl hover:bg-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
           >
             <Calendar size={20} aria-hidden="true" />
             Agenda tu 1ª Consultoría Gratuita
           </a>
         </motion.div>
+
+        {/* Price disclaimer */}
+        <div className="text-center text-sm text-gray-500 mt-8">
+          * Todos los precios están en pesos chilenos (CLP) y no incluyen IVA.
+          Los valores finales pueden variar según necesidades específicas del proyecto.
+        </div>
       </div>
 
       {/* Modal */}

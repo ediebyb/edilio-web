@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 import { NAV_LINKS } from '@/data/navigation'
+import { SETMORE_LINK } from '@/data/setmore'
 
 
 
@@ -92,7 +93,7 @@ export default function Navigation() {
 
             <img
 
-              src="/logo 1.png"
+              src="/logo.png"
 
               alt="Edilio Beas Logo"
 
@@ -138,9 +139,11 @@ export default function Navigation() {
 
           <a
 
-            href="#contacto"
+            href={SETMORE_LINK}
 
-            onClick={(e) => handleNavClick(e, '#contacto')}
+            target="_blank"
+
+            rel="noopener noreferrer"
 
             className="hidden md:inline-flex items-center px-6 py-3 bg-[#C5A059] text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-[#C5A059]/30 transition-all duration-200"
 
@@ -228,9 +231,11 @@ export default function Navigation() {
 
                   <a
 
-                    href="#contacto"
+                    href={SETMORE_LINK}
 
-                    onClick={(e) => handleNavClick(e, '#contacto')}
+                    target="_blank"
+
+                    rel="noopener noreferrer"
 
                     className="block w-full text-center px-4 py-3 bg-[#C5A059] text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-[#C5A059]/30 transition-all duration-200"
 

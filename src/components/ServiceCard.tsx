@@ -18,9 +18,18 @@ export default function ServiceCard({ service, onOpenModal }: ServiceCardProps) 
       whileHover="hover"
       className="p-6 hover:shadow-xl transition-shadow duration-300 bg-white rounded-xl border border-gray-100 flex flex-col h-full"
     >
-      {/* Icono más grande y llamativo */}
-      <div className="w-14 h-14 bg-gradient-to-br from-[#05121F] to-[#0F2436] rounded-lg flex items-center justify-center mb-4 shadow-lg">
-        <Icon className="w-7 h-7 text-[#C5A059]" aria-hidden="true" />
+      {/* Image */}
+      <div className="w-full h-32 mb-4 rounded-lg overflow-hidden bg-gray-50">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      {/* Icono más pequeño */}
+      <div className="w-10 h-10 bg-gradient-to-br from-[#05121F] to-[#0F2436] rounded-lg flex items-center justify-center mb-3 shadow-lg">
+        <Icon className="w-5 h-5 text-[#C5A059]" aria-hidden="true" />
       </div>
 
       {/* Título corto y directo */}
@@ -38,6 +47,9 @@ export default function ServiceCard({ service, onOpenModal }: ServiceCardProps) 
         <span className="text-2xl font-bold text-[#C5A059]">
           {service.price}
         </span>
+        {service.priceNote && (
+          <p className="text-xs text-gray-500 mt-1">{service.priceNote}</p>
+        )}
       </div>
 
       {/* Botón "Ver más" */}

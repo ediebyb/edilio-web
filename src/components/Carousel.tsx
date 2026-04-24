@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, TrendingUp, Award } from 'lucide-react'
+import { SETMORE_LINK } from '@/data/setmore'
 
 interface Slide {
   title: string
@@ -52,12 +53,6 @@ export default function Carousel() {
     return () => clearInterval(timer)
   }, [])
 
-  const handleScrollToContact = () => {
-    const target = document.querySelector('#contacto')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % slides.length)
@@ -117,13 +112,15 @@ export default function Carousel() {
             </ul>
           )}
 
-          <button
-            onClick={handleScrollToContact}
+          <a
+            href={SETMORE_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-white font-semibold rounded-xl hover:bg-amber-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
           >
             <Calendar size={20} />
             {slides[currentIndex].cta}
-          </button>
+          </a>
         </motion.div>
       </AnimatePresence>
 

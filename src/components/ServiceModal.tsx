@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle, Clock } from 'lucide-react'
 import type { Service } from '@/types'
+import { SETMORE_LINK } from '@/data/setmore'
 
 interface ServiceModalProps {
   service: Service | null
@@ -10,14 +11,6 @@ interface ServiceModalProps {
 
 export default function ServiceModal({ service, isOpen, onClose }: ServiceModalProps) {
   if (!service) return null
-
-  const handleScrollToContact = () => {
-    onClose()
-    const target = document.querySelector('#contacto')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <AnimatePresence>
@@ -61,6 +54,15 @@ export default function ServiceModal({ service, isOpen, onClose }: ServiceModalP
 
               {/* Content */}
               <div className="p-6 space-y-6">
+                {/* Image */}
+                <div className="w-full h-48 rounded-lg overflow-hidden bg-gray-50">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
                 {/* Descripción completa */}
                 <p className="text-gray-600 leading-relaxed">
                   {service.fullDetails.description}
@@ -99,16 +101,28 @@ export default function ServiceModal({ service, isOpen, onClose }: ServiceModalP
                 {/* Precio destacado */}
                 <div className="text-center py-4 border-t border-gray-100">
                   <span className="text-3xl font-bold text-[#C5A059]">{service.price}</span>
-                  <p className="text-sm text-gray-500 mt-1">Cotización personalizada según necesidades</p>
+                  {service.priceNote && (
+                    <p className="text-sm text-gray-500 mt-1">{service.priceNote}</p>
+                  )}
+                  <p className="text-sm text-gray-500 mt-2">Cotización personalizada según necesidades</p>
                 </div>
 
+                {/* Note if exists */}
+                {service.note && (
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800">
+                    {service.note}
+                  </div>
+                )}
+
                 {/* CTA Final */}
-                <button
-                  onClick={handleScrollToContact}
-                  className="w-full bg-[#C5A059] text-white py-4 rounded-lg font-bold text-lg hover:bg-[#D4AF6A] transition-colors shadow-lg"
+                <a
+                  href={SETMORE_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-[#C5A059] text-white py-4 rounded-lg font-bold text-lg hover:bg-[#D4AF6A] transition-colors shadow-lg text-center"
                 >
                   {service.fullDetails.ctaFinal}
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
