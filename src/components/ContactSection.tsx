@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Youtube } from 'lucide-react'
 import { staggerContainer, fadeInUp, slideInLeft, slideInRight } from '@/utils/animations'
 import ContactForm from './ContactForm'
 
@@ -44,7 +44,7 @@ export default function ContactSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
-            className="space-y-8"
+            className="space-y-8 h-full"
           >
             <div>
               <h3 className="text-xl font-heading font-semibold text-brand-dark mb-6">
@@ -101,6 +101,55 @@ export default function ContactSection() {
               <p className="text-gray-600 text-sm">
                 Lunes a Viernes: 9:00 – 17:00 (hora Chile)
               </p>
+            </div>
+
+            {/* Logo */}
+            <div className="flex justify-center">
+              <img
+                src="/logo 1.png"
+                alt="Edilio Beas - Consultor PyME"
+                className="h-12 w-auto"
+              />
+            </div>
+
+            {/* Redes sociales */}
+            <div className="grid grid-cols-4 gap-4">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center p-3 bg-white rounded-lg border border-gray-200 text-gray-600 hover:text-[#C5A059] hover:border-[#C5A059] transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center p-3 bg-white rounded-lg border border-gray-200 text-gray-600 hover:text-[#C5A059] hover:border-[#C5A059] transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center p-3 bg-white rounded-lg border border-gray-200 text-gray-600 hover:text-[#C5A059] hover:border-[#C5A059] transition-colors"
+                aria-label="Twitter/X"
+              >
+                <Twitter size={20} />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center p-3 bg-white rounded-lg border border-gray-200 text-gray-600 hover:text-[#C5A059] hover:border-[#C5A059] transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
+              </a>
             </div>
           </motion.div>
 

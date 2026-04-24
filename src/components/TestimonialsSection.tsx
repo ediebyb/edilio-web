@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { TESTIMONIALS } from '@/data/testimonials'
@@ -8,6 +8,17 @@ import TestimonialCard from './TestimonialCard'
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    if (!isPaused) {
+      const timer = setInterval(() => {
+        setDirection(1)
+        setCurrentIndex((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1))
+      }, 5000)
+      return () => clearInterval(timer)
+    }
+  }, [isPaused])
 
   const handlePrev = () => {
     setDirection(-1)
@@ -23,6 +34,15 @@ export default function TestimonialsSection() {
     enter: (dir: number) => ({ x: dir > 0 ? 300 : -300, opacity: 0 }),
     center: { x: 0, opacity: 1, transition: { duration: 0.4, ease: 'easeOut' } },
     exit: (dir: number) => ({ x: dir > 0 ? -300 : 300, opacity: 0, transition: { duration: 0.3 } }),
+  }
+
+  // Get 3 testimonials for desktop view (current + next 2)
+  const getDesktopTestimonials = () => {
+    const result = []
+    for (let i = 0; i < 3; i++) {
+      result.push(TESTIMONIALS[(currentIndex + i) % TESTIMONIALS.length])
+    }
+    return result
   }
 
   return (
@@ -58,8 +78,8 @@ export default function TestimonialsSection() {
           </motion.p>
         </motion.div>
 
-        {/* Carrusel móvil */}
-        <div className="md:hidden">
+        {/* Carrusel - Mobile (1 testimonio) */}
+        <div className="md:hidden" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
           <div className="relative overflow-hidden">
             <AnimatePresence custom={direction} mode="wait">
               <motion.div
@@ -117,20 +137,67 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Grilla desktop */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        {/* Carrusel - Desktop (3 testimonios) */}
+        <div 
+          className="hidden md:block"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          {TESTIMONIALS.slice(0, 3).map((testimonial) => (
-            <motion.div key={testimonial.id} variants={fadeInUp}>
-              <TestimonialCard testimonial={testimonial} />
-            </motion.div>
-          ))}
-        </motion.div>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {getDesktopTestimonials().map((testimonial, index) => (
+              <motion.div key={`${testimonial.id}-${currentIndex}`} variants={fadeInUp}>
+                <TestimonialCard testimonial={testimonial} />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Controles de navegación desktop */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              aria-label="Testimonio anterior"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Indicadores */}
+            <div className="flex gap-2" role="tablist" aria-label="Testimonios">
+              {TESTIMONIALS.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === currentIndex}
+                  aria-label={`Testimonio ${index + 1}`}
+                  onClick={() => {
+                    setDirection(index > currentIndex ? 1 : -1)
+                    setCurrentIndex(index)
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                    index === currentIndex ? 'bg-brand-accent w-6' : 'bg-white/30'
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              aria-label="Siguiente testimonio"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   )

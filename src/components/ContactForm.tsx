@@ -153,10 +153,11 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Email */}
+      {/* Email (opcional) */}
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-brand-dark mb-1.5">
-          Correo electrónico <span className="text-red-500" aria-hidden="true">*</span>
+          Correo electrónico{' '}
+          <span className="text-gray-400 font-normal text-xs">(opcional)</span>
         </label>
         <input
           id="email"
@@ -164,9 +165,7 @@ export default function ContactForm() {
           name="email"
           value={data.email}
           onChange={handleChange}
-          required
           autoComplete="email"
-          aria-required="true"
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? 'email-error' : undefined}
           className={`w-full px-4 py-3 rounded-xl border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/30 ${
@@ -174,7 +173,7 @@ export default function ContactForm() {
               ? 'border-red-400 bg-red-50 focus:border-red-400'
               : 'border-gray-200 bg-white focus:border-brand-primary'
           }`}
-          placeholder="tu@email.com"
+          placeholder="tu@email.com (opcional)"
         />
         {errors.email && (
           <p id="email-error" className="mt-1.5 text-sm text-red-600 flex items-center gap-1" role="alert">
@@ -184,11 +183,10 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Teléfono (opcional) */}
+      {/* Teléfono (requerido) */}
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-brand-dark mb-1.5">
-          Teléfono{' '}
-          <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+          Teléfono <span className="text-red-500" aria-hidden="true">*</span>
         </label>
         <input
           id="phone"
@@ -196,7 +194,9 @@ export default function ContactForm() {
           name="phone"
           value={data.phone}
           onChange={handleChange}
+          required
           autoComplete="tel"
+          aria-required="true"
           aria-invalid={!!errors.phone}
           aria-describedby={errors.phone ? 'phone-error' : undefined}
           className={`w-full px-4 py-3 rounded-xl border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/30 ${
@@ -234,7 +234,7 @@ export default function ContactForm() {
               ? 'border-red-400 bg-red-50 focus:border-red-400'
               : 'border-gray-200 bg-white focus:border-brand-primary'
           }`}
-          placeholder="Cuéntame sobre tu negocio y en qué puedo ayudarte..."
+          placeholder="Cuéntame: ¿Cuál es el mayor desafío de tu negocio hoy? Te leeré y responderé en menos de 24h."
         />
         {errors.message && (
           <p id="message-error" className="mt-1.5 text-sm text-red-600 flex items-center gap-1" role="alert">

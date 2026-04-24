@@ -1,29 +1,16 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar } from 'lucide-react'
 import { SERVICES } from '@/data/services'
 import { staggerContainer, fadeInUp } from '@/utils/animations'
 import ServiceCard from './ServiceCard'
-import ServiceModal from './ServiceModal'
-import type { Service } from '@/types'
 
 export default function ServicesSection() {
-  const [selectedService, setSelectedService] = useState<Service | null>(null)
-
   const handleScrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const target = document.querySelector('#contacto')
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })
     }
-  }
-
-  const handleLearnMore = (service: Service) => {
-    setSelectedService(service)
-  }
-
-  const handleCloseModal = () => {
-    setSelectedService(null)
   }
 
   return (
@@ -73,7 +60,7 @@ export default function ServicesSection() {
         >
           {SERVICES.map((service) => (
             <motion.div key={service.id} variants={fadeInUp}>
-              <ServiceCard service={service} onLearnMore={handleLearnMore} />
+              <ServiceCard service={service} />
             </motion.div>
           ))}
         </motion.div>
@@ -96,15 +83,6 @@ export default function ServicesSection() {
           </a>
         </motion.div>
       </div>
-
-      {/* Modal */}
-      {selectedService && (
-        <ServiceModal
-          service={selectedService}
-          isOpen={!!selectedService}
-          onClose={handleCloseModal}
-        />
-      )}
     </section>
   )
 }

@@ -23,11 +23,15 @@ export function validateForm(data: FormData): FormErrors {
     errors.name = 'El nombre debe tener al menos 2 caracteres.'
   }
 
-  if (!data.email || !EMAIL_REGEX.test(data.email.trim())) {
+  // Email is now optional
+  if (data.email && data.email.trim() !== '' && !EMAIL_REGEX.test(data.email.trim())) {
     errors.email = 'Ingresa un correo electrónico válido.'
   }
 
-  if (data.phone && data.phone.trim() !== '' && !PHONE_REGEX.test(data.phone)) {
+  // Phone is now required
+  if (!data.phone || data.phone.trim().length < 8) {
+    errors.phone = 'Ingresa un número de teléfono válido.'
+  } else if (!PHONE_REGEX.test(data.phone)) {
     errors.phone = 'Solo se permiten números, espacios, guiones y +.'
   }
 

@@ -24,9 +24,23 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     id: 'testimonial-4',
-    name: 'Roberto Fuentes',
-    role: 'Director, Agencia de Marketing Digital',
+    name: 'Roberto Silva',
+    role: 'CEO, TechSolutions Chile',
     quote:
-      'Las automatizaciones en Excel que desarrolló Edilio redujeron nuestro tiempo de reportes de 4 horas a 15 minutos. Una inversión que se pagó sola en el primer mes.',
+      'Nuestra web ahora genera el doble de leads que antes. Edilio no solo diseña bonito, entiende de conversiones y ventas. Un socio estratégico real.',
+  },
+  {
+    id: 'testimonial-5',
+    name: 'Patricia Morales',
+    role: 'Directora, Clínica Dental Sonrisas',
+    quote:
+      'Automatizó todos nuestros reportes administrativos. Lo que nos tomaba 2 días ahora se hace automático. Recuperamos 20 horas semanales mínimo.',
+  },
+  {
+    id: 'testimonial-6',
+    name: 'Luis Fernández',
+    role: 'Dueño, Restaurante El Sabor',
+    quote:
+      'Aparecer primero en Google Maps duplicó nuestras reservas. La inversión se pagó sola en el primer mes. Edilio sabe lo que hace.',
   },
 ]

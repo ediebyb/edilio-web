@@ -36,7 +36,7 @@ export default function Navigation() {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         aria-label="Navegación principal"
       >
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20">
           {/* Logo / Marca */}
           <a
             href="#inicio"
@@ -47,7 +47,7 @@ export default function Navigation() {
             <img
               src="/logo 1.png"
               alt="Edilio Beas Logo"
-              className="h-20 w-auto"
+              className="h-10 w-auto"
             />
           </a>
 

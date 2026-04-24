@@ -1,18 +1,21 @@
 import { motion } from 'framer-motion'
 import type { Service } from '@/types'
 import { cardHover } from '@/utils/animations'
+import { Check } from 'lucide-react'
 
 interface ServiceCardProps {
   service: Service
-  onLearnMore: (service: Service) => void
 }
 
-export default function ServiceCard({ service, onLearnMore }: ServiceCardProps) {
+export default function ServiceCard({ service }: ServiceCardProps) {
   const Icon = service.icon
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleScrollToContact = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    onLearnMore(service)
+    const target = document.querySelector('#contacto')
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
@@ -33,18 +36,39 @@ export default function ServiceCard({ service, onLearnMore }: ServiceCardProps) 
       </h3>
 
       {/* Descripción */}
-      <p className="text-gray-600 text-sm leading-relaxed flex-1">
+      <p className="text-gray-600 text-sm leading-relaxed mb-4">
         {service.description}
       </p>
 
+      {/* Features */}
+      <ul className="space-y-2 mb-4 flex-1">
+        {service.features.map((feature, index) => (
+          <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
+            <Check size={16} className="text-brand-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Note */}
+      {service.note && (
+        <p className="text-xs text-gray-500 mb-3 italic">
+          {service.note}
+        </p>
+      )}
+
+      {/* Price */}
+      <div className="mb-4">
+        <span className="text-lg font-bold text-brand-primary">{service.price}</span>
+      </div>
+
       {/* CTA */}
       <button
-        onClick={handleClick}
-        className="mt-4 inline-flex items-center text-brand-primary text-sm font-medium hover:text-brand-secondary transition-colors duration-200 group"
-        aria-label={`Saber más sobre ${service.title}`}
+        onClick={handleScrollToContact}
+        className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-accent text-white text-sm font-semibold rounded-lg hover:bg-amber-600 transition-colors duration-200"
+        aria-label={service.cta}
       >
-        Saber más
-        <span className="ml-1 group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true">→</span>
+        {service.cta}
       </button>
     </motion.div>
   )

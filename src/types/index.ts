@@ -5,15 +5,10 @@ export interface Service {
   icon: ComponentType<{ size?: number | string; className?: string }>
   title: string
   description: string
-  modalContent?: {
-    problem: string
-    solution: string
-    includes: string[]
-    results: string[]
-    investment: string
-    duration: string
-    cta: string
-  }
+  features: string[]
+  price: string
+  cta: string
+  note?: string
 }
 
 export interface Testimonial {
